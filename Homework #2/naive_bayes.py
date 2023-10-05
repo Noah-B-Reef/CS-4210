@@ -3,7 +3,7 @@
 # FILENAME: title of the source file
 # SPECIFICATION: description of the program
 # FOR: CS 4210- Assignment #2
-# TIME SPENT: how long it took you to complete the assignment
+# TIME SPENT: 30 minutes
 #-----------------------------------------------------------*/
 
 
