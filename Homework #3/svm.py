@@ -3,7 +3,7 @@
 # FILENAME: svm.py
 # SPECIFICATION: Find optimal parameters for SVM classifier
 # FOR: CS 4210- Assignment #3
-# TIME SPENT: how long it took you to complete the assignment
+# TIME SPENT: 30 minutes
 #-----------------------------------------------------------*/
 
 #IMPORTANT NOTE: YOU HAVE TO WORK WITH THE PYTHON LIBRARIES numpy AND pandas to complete this code.
