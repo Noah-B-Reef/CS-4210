@@ -39,20 +39,28 @@ for cost in c:
 
                 #Create an SVM classifier that will test all combinations of c, degree, kernel, and decision_function_shape.
                 #For instance svm.SVC(c=1, degree=1, kernel="linear", decision_function_shape = "ovo")
-                clf = svm.SVC(c=cost, degree=d, kernel=k, decision_function_shape=shape)
+                clf = svm.SVC(C=cost, degree=d, kernel=k, decision_function_shape=shape)
 
                 #Fit SVM to the training data
-                clf.Fit(X_training,y_training)
+                clf.fit(X_training, y_training)
 
                 #make the SVM prediction for each test sample and start computing its accuracy
                 #hint: to iterate over two collections simultaneously, use zip()
                 #Example. for (x_testSample, y_testSample) in zip(X_test, y_test):
                 #to make a prediction do: clf.predict([x_testSample])
-                
+        
+                accuracy = 0
+                for (x_testSample, y_testSample) in zip(X_test, y_test):
+                    if clf.predict([x_testSample]) == y_testSample:
+                        accuracy += 1
 
+                accuracy = accuracy / len(X_test)
+                
                 #check if the calculated accuracy is higher than the previously one calculated. If so, update the highest accuracy and print it together
                 #with the SVM hyperparameters. Example: "Highest SVM accuracy so far: 0.92, Parameters: a=1, degree=2, kernel= poly, decision_function_shape = 'ovo'"
-                #--> add your Python code here
+                if accuracy > highest_accuracy:
+                    highest_accuracy = accuracy
+                    print("Highest SVM accuracy so far: " + str(highest_accuracy) + ", Parameters: c=" + str(cost) + ", degree=" + str(d) + ", kernel=" + k + ", decision_function_shape=" + shape)
 
 
 
