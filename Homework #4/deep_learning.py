@@ -1,9 +1,9 @@
 # -------------------------------------------------------------------------
-# AUTHOR: your name
-# FILENAME: title of the source file
-# SPECIFICATION: description of the program
+# AUTHOR: Noah Reef
+# FILENAME: deep_learning.py
+# SPECIFICATION: deep learning model
 # FOR: CS 4210- Assignment #4
-# TIME SPENT: how long it took you to complete the assignment
+# TIME SPENT: 30 minutes
 # -----------------------------------------------------------*/
 # IMPORTANT NOTE: YOU CAN USE ANY PYTHON LIBRARY TO COMPLETE YOUR CODE.
 # importing the libraries
@@ -70,17 +70,19 @@ for num_layers in n_hidden:  # looking or the best parameters w.r.t the number o
                                                                              y_valid))  # epochs = number times that the learning algorithm will work through the entire training dataset.
 
             # Calculate the accuracy of this neural network and store its value if it is the highest so far. To make a prediction, do: class_predicted = np.argmax(model.predict(X_test), axis=-1)
-            acc = 0
-            for (x_testSample, y_testSample) in zip(X_test, y_test):
-                if model.predict([x_testSample]) == y_testSample:
-                    acc += 1
-            acc = acc / len(X_test)
+    
+            score, acc = model.evaluate(X_test, y_test)
 
             if acc > highestAccuracy:
                 highestAccuracy = acc
                 print("Highest accuracy so far: " + str(highestAccuracy))
                 print("Parameters: " + "Number of Hidden Layers: " + str(num_layers) + ",number of neurons: " + str(
                     neurons) + ", learning rate: " + str(rate))
+                best_model = model
+                best_history = history
+
+model = best_model
+history = best_history
 
 print(model.summary())
 
@@ -88,8 +90,10 @@ img_file = './model_arch.png'
 
 tf.keras.utils.plot_model(model, to_file=img_file, show_shapes=True,
                           show_layer_names=True)
+
 # plotting the learning curves of the best model
 pd.DataFrame(history.history).plot(figsize=(8, 5))
 plt.grid(True)
 plt.gca().set_ylim(0, 1)  # set the vertical range to [0-1]
-plt.show()
+plt.savefig("learning_curves.png", dpi=100)
+# plt.show()
