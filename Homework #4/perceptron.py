@@ -16,12 +16,12 @@ import pandas as pd
 n = [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1.0]
 r = [True, False]
 
-df = pd.read_csv('Homework #4/optdigits.tra', sep=',', header=None) #reading the data by using Pandas library
+df = pd.read_csv('optdigits.tra', sep=',', header=None) #reading the data by using Pandas library
 
 X_training = np.array(df.values)[:,:64] #getting the first 64 fields to form the feature data for training
 y_training = np.array(df.values)[:,-1] #getting the last field to form the class label for training
 
-df = pd.read_csv('Homework #4/optdigits.tes', sep=',', header=None) #reading the data by using Pandas library
+df = pd.read_csv('optdigits.tes', sep=',', header=None) #reading the data by using Pandas library
 
 X_test = np.array(df.values)[:,:64] #getting the first 64 fields to form the feature data for test
 y_test = np.array(df.values)[:,-1] #getting the last field to form the class label for test
@@ -47,7 +47,7 @@ for n_k in n: #iterates over n
                 clf = Perceptron(eta0=n_k, shuffle=r_k, max_iter=1000)
 
             else:
-                clf = MLPClassifier(activation='logistic', learning_rate_init=n_k, shuffle=r_k, max_iter=1000)
+                clf = MLPClassifier(activation='logistic', learning_rate_init=n_k, shuffle=r_k, max_iter=1000, hidden_layer_sizes=(25,))
 
             clf.fit(X_training, y_training)
 
